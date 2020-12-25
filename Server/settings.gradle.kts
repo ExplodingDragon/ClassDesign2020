@@ -1,1 +1,1 @@
-rootProject.name = "ClassDesign"
+rootProject.name = "Server"

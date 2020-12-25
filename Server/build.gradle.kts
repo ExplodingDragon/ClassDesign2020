@@ -7,7 +7,13 @@ plugins {
 	kotlin("plugin.spring") version "1.4.21"
 	kotlin("plugin.jpa") version "1.4.21"
 }
-
+repositories {
+	mavenLocal()
+	maven { url = project.uri("https://maven.aliyun.com/repository/public/") }
+	jcenter()
+	mavenCentral()
+	maven { url = project.uri("https://jitpack.io") }
+}
 group = "tech.openEdgn"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
@@ -18,9 +24,6 @@ configurations {
 	}
 }
 
-repositories {
-	mavenCentral()
-}
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -37,6 +40,10 @@ dependencies {
 	runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
 	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 	annotationProcessor("org.projectlombok:lombok")
+	implementation("org.springdoc:springdoc-openapi-kotlin:1.5.1")
+	implementation("org.springdoc:springdoc-openapi-ui:1.5.1")
+	implementation("com.github.OpenEdgn.Logger4K:core:1.3.0")
+	implementation("com.github.OpenEdgn.Logger4K:logger-slf4j:1.3.0")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
 }
@@ -50,4 +57,13 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+allprojects {
+	repositories {
+		mavenLocal()
+		maven { url = project.uri("https://maven.aliyun.com/repository/public/") }
+		jcenter()
+		mavenCentral()
+		maven { url = project.uri("https://jitpack.io") }
+	}
 }
