@@ -29,7 +29,7 @@ data class UserEntity(
         joinColumns = [JoinColumn(name = "user_id")],
         inverseJoinColumns = [JoinColumn(name = "group_id")]
     )
-    val groupList: MutableList<GroupEntity>,
-    @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    val details: MutableList<UserDetailsEntity>
+    val groupList: MutableList<GroupEntity> = mutableListOf(),
+@OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+val details: MutableList<UserDetailsEntity> = mutableListOf()
 )

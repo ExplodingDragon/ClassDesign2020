@@ -46,6 +46,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     compileOnly("org.projectlombok:lombok")
+    implementation("com.github.OpenEdgn:Security4k:1.0.0")
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
@@ -54,15 +55,12 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-ui:1.5.2")
     implementation("org.springdoc:springdoc-openapi-data-rest:1.5.2")
     implementation("com.github.OpenEdgn.Logger4K:core:1.3.0")
-
     implementation("com.querydsl:querydsl-jpa:$queryDSLVersion")
     annotationProcessor(group = "com.querydsl", name = "querydsl-apt", classifier = "jpa")
     kapt("com.querydsl:querydsl-apt:$queryDSLVersion:jpa")
-
     implementation("com.github.OpenEdgn.Logger4K:logger-slf4j:1.3.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
-
 }
 
 

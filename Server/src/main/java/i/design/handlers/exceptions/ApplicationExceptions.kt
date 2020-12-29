@@ -11,4 +11,7 @@ object ApplicationExceptions {
     }
 
     fun internalException(msg: String = "未知错误！"): ApplicationException = ApplicationException(500, msg)
+    fun forbidden(contextPath: String): ApplicationException {
+        return ApplicationException(403, "没有权限 $contextPath")
+    }
 }

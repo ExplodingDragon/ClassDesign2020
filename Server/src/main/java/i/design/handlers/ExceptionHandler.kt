@@ -4,6 +4,7 @@ import com.github.openEdgn.logger4k.getLogger
 import i.design.handlers.exceptions.ApplicationException
 import i.design.handlers.result.Result
 import i.design.handlers.result.Results
+import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpStatus
 import org.springframework.validation.FieldError
 import org.springframework.web.bind.MethodArgumentNotValidException
@@ -11,11 +12,23 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
+import org.springframework.web.servlet.DispatcherServlet
 import org.springframework.web.servlet.NoHandlerFoundException
+import org.springframework.web.servlet.config.annotation.EnableWebMvc
+import javax.annotation.PostConstruct
+import javax.annotation.Resource
 
+@EnableWebMvc
+@Configuration
 @RestControllerAdvice
 class ExceptionHandler {
+    @Resource
+    private lateinit var dispatcherServlet: DispatcherServlet
 
+    @PostConstruct
+    private fun configureDispatcherServlet() {
+        dispatcherServlet.setThrowExceptionIfNoHandlerFound(true)
+    }
     private val logger = getLogger()
 
     @ResponseBody
