@@ -3,6 +3,8 @@ spring:
     hibernate:
       ddl-auto: update
     open-in-view: false
+  profiles:
+    active: dev
 springdoc:
   swagger-ui:
     path: /swagger-ui.html

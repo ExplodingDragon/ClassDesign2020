@@ -3,6 +3,7 @@ package i.design.handlers.jwt
 import i.design.handlers.exceptions.ApplicationExceptions
 import i.design.modules.token.services.ITokenService
 import org.springframework.stereotype.Component
+import org.springframework.web.context.request.WebRequest
 import org.springframework.web.method.HandlerMethod
 import org.springframework.web.servlet.HandlerInterceptor
 import javax.annotation.Resource
@@ -29,14 +30,25 @@ class AuthInterceptor : HandlerInterceptor {
         }
 
         val annotation = tokenService.verifyAnnotation().java
-        return if (method.isAnnotationPresent(annotation)) {
-            tokenService.verifyToken0(getToken(request), method.getAnnotation(annotation))
+        if (method.isAnnotationPresent(annotation) && tokenService.verifyToken0(
+                getToken(request),
+                method.getAnnotation(annotation)
+            )
+        ) {
+            return true
         } else {
             throw ApplicationExceptions.forbidden(request.requestURI)
         }
     }
 
-    private fun getToken(request: HttpServletRequest): String {
-        return request.getHeader("Authorization") ?: throw ApplicationExceptions.forbidden(request.requestURI)
+    companion object {
+        const val headerName = "Authorization"
+        fun getToken(request: HttpServletRequest): String {
+            return request.getHeader(headerName) ?: throw ApplicationExceptions.forbidden(request.requestURI)
+        }
+
+        fun getHeader(request: WebRequest): String {
+            return request.getHeader(headerName) ?: throw ApplicationExceptions.forbidden(request.contextPath)
+        }
     }
 }

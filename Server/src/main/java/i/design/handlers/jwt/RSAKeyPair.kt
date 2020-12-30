@@ -1,9 +1,9 @@
 package i.design.handlers.jwt
 
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.stereotype.Component
+import org.springframework.context.annotation.Configuration
 
-@Component
+@Configuration
 data class RSAKeyPair(
     @Value("\${app.security.publicKey}")
     val publicKey: String,

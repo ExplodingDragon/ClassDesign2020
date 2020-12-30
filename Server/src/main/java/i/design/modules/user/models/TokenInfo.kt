@@ -1,4 +1,4 @@
-package i.design.modules.auth.models
+package i.design.modules.user.models
 
 /**
  * token 包含信息

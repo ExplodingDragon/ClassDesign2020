@@ -1,4 +1,4 @@
-package i.design.modules.auth.models.put
+package i.design.modules.user.models.put
 
 import io.swagger.v3.oas.annotations.media.Schema
 import javax.validation.constraints.Email
