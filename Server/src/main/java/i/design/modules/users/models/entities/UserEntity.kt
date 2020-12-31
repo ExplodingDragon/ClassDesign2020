@@ -1,5 +1,6 @@
 package i.design.modules.users.models.entities
 
+import java.time.LocalDateTime
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
@@ -15,6 +16,8 @@ data class UserEntity(
     @Column(nullable = false, length = 128)
     var password: String,
     @Column(nullable = false)
-    var admin: Boolean
+    var admin: Boolean,
+    @Column(nullable = false)
+    var registerDate: LocalDateTime
 
 )
