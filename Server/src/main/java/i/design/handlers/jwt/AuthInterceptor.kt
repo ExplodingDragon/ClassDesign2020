@@ -29,7 +29,7 @@ class AuthInterceptor : HandlerInterceptor {
             return true
         }
 
-        val annotation = tokenService.verifyAnnotation().java
+        val annotation = tokenService.verifyAnnotation.java
         if (method.isAnnotationPresent(annotation) && tokenService.verifyToken0(
                 getToken(request),
                 method.getAnnotation(annotation)
@@ -42,7 +42,7 @@ class AuthInterceptor : HandlerInterceptor {
     }
 
     companion object {
-        const val headerName = "Authorization"
+        private const val headerName = "Authorization"
         fun getToken(request: HttpServletRequest): String {
             return request.getHeader(headerName) ?: throw ApplicationExceptions.forbidden(request.requestURI)
         }

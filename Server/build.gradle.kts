@@ -7,7 +7,6 @@ plugins {
     kotlin("plugin.spring") version "1.4.21"
     kotlin("plugin.jpa") version "1.4.21"
     kotlin("plugin.noarg") version "1.4.21"
-    kotlin("kapt") version "1.4.21"
 }
 noArg {
     annotation("i.design")
@@ -32,33 +31,25 @@ configurations {
 
 val queryDSLVersion = "4.4.0"
 
-kapt.includeCompileClasspath = true
-
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
-    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-    compileOnly("org.projectlombok:lombok")
-    implementation("com.github.OpenEdgn:Security4k:1.0.0")
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
-    annotationProcessor("org.projectlombok:lombok")
     implementation("org.springdoc:springdoc-openapi-kotlin:1.5.2")
     implementation("org.springdoc:springdoc-openapi-ui:1.5.2")
     implementation("org.springdoc:springdoc-openapi-data-rest:1.5.2")
     implementation("com.github.OpenEdgn.Logger4K:core:1.3.0")
-    implementation("com.querydsl:querydsl-jpa:$queryDSLVersion")
-    annotationProcessor(group = "com.querydsl", name = "querydsl-apt", classifier = "jpa")
-    kapt("com.querydsl:querydsl-apt:$queryDSLVersion:jpa")
     implementation("com.github.OpenEdgn.Logger4K:logger-slf4j:1.3.0")
+    implementation("com.github.OpenEdgn:Security4k:1.0.0")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
 }

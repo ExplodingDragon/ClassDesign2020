@@ -3,7 +3,7 @@ package i.design.handlers
 import com.github.openEdgn.logger4k.getLogger
 import i.design.handlers.exceptions.ApplicationException
 import i.design.handlers.result.Result
-import i.design.handlers.result.Results
+import i.design.handlers.result.ResultUtils
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpStatus
 import org.springframework.validation.FieldError
@@ -36,7 +36,7 @@ class ExceptionHandler {
     @ResponseStatus
     fun exceptionHandler(e: Exception): Result {
         logger.errorThrowable("发送服务器内部错误", e)
-        return Results.Fail.UNKNOWN("服务器内部错误")
+        return ResultUtils.Fail.unknown("服务器内部错误")
     }
 
     @ExceptionHandler(
@@ -45,7 +45,7 @@ class ExceptionHandler {
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ResponseBody
     fun notFoundExceptionHandler(e: NoHandlerFoundException): Result {
-        return Results.Fail.NOT_FOUND(e.requestURL)
+        return ResultUtils.Fail.notFound(e.requestURL)
     }
 
     @ResponseBody
@@ -70,7 +70,7 @@ class ExceptionHandler {
             }
             builder.append("字段 $param ").append(it.defaultMessage ?: "格式化异常")
         }
-        return Results.Fail.BAD_REQUEST(builder.toString())
+        return ResultUtils.Fail.badRequest(builder.toString())
     }
 
 }

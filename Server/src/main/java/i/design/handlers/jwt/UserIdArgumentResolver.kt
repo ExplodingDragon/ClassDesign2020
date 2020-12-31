@@ -10,6 +10,9 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver
 import org.springframework.web.method.support.ModelAndViewContainer
 
 
+/**
+ * JWT 注入用户信息
+ */
 @Component
 class UserIdArgumentResolver : HandlerMethodArgumentResolver {
 
@@ -30,6 +33,6 @@ class UserIdArgumentResolver : HandlerMethodArgumentResolver {
         webRequest: NativeWebRequest,
         binderFactory: WebDataBinderFactory?
     ): Long {
-            return tokenService.loadUserIdFromToken(webRequest)
+        return tokenService.getUserIdByToken(AuthInterceptor.getHeader(webRequest))
     }
 }

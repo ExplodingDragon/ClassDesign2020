@@ -3,7 +3,7 @@ package i.design.handlers
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.openEdgn.logger4k.getLogger
 import i.design.handlers.result.Result
-import i.design.handlers.result.Results
+import i.design.handlers.result.ResultUtils
 import org.springframework.core.MethodParameter
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -16,7 +16,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice
 
 @RestControllerAdvice
 class ResponseAdvice : ResponseBodyAdvice<Any> {
-    private val logger = getLogger()
     override fun supports(returnType: MethodParameter, converterType: Class<out HttpMessageConverter<*>>): Boolean {
         return returnType.parameterType != String::class.java
     }
@@ -31,7 +30,7 @@ class ResponseAdvice : ResponseBodyAdvice<Any> {
     ): Any? {
         val requestPath = request.uri.path
         val result = if (body == null) {
-            Results.Fail.NULL()
+            ResultUtils.Fail.nullPoint()
         } else {
             if (!requestPath.startsWith("/api/")) {
                 formatData(body)
@@ -39,7 +38,7 @@ class ResponseAdvice : ResponseBodyAdvice<Any> {
                 if (body is Result) {
                     formatData(body)
                 } else {
-                    Results.OK(formatData(body))
+                    ResultUtils.ok(formatData(body))
 
                 }
             }

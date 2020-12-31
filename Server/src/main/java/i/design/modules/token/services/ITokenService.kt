@@ -1,8 +1,6 @@
 package i.design.modules.token.services
 
 import com.github.openEdgn.logger4k.ILogger
-import i.design.modules.user.models.table.UserEntity
-import org.springframework.web.context.request.WebRequest
 import kotlin.reflect.KClass
 
 interface ITokenService<T : Annotation> {
@@ -27,15 +25,15 @@ interface ITokenService<T : Annotation> {
     fun verifyToken(token: String, tokenInfo: T): Boolean
 
     /**
-     * 创建 Token
-     * @param user UserEntity
-     * @return String
+     * 根据 TOKEN 得到用户信息
+     * @param token String
+     * @return Long
      */
-    fun createToken(user: UserEntity): String
+    fun getUserIdByToken(token: String): Long
 
-
-    fun verifyAnnotation(): KClass<out T>
-
-    fun loadUserIdFromToken(webRequest: WebRequest): Long
+    /**
+     *  监听的注解
+     */
+    val verifyAnnotation: KClass<out T>
 
 }

@@ -9,13 +9,11 @@ class SnowFlake {
     /**
      * 机器标识
      */
-    @Value("\${app.worker.id}")
     private val workerId: Long = 0
 
     /**
      * 数据中心编号
      */
-    @Value("\${app.data.center.id}")
     private val dataCenterId: Long = 0
 
     /**
