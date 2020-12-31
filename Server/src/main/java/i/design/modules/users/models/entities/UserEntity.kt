@@ -17,6 +17,7 @@ data class UserEntity(
     var password: String,
     @Column(nullable = false)
     var admin: Boolean,
+    // reg
     @Column(nullable = false)
     var registerDate: LocalDateTime
 
