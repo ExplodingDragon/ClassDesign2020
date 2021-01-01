@@ -1,0 +1,18 @@
+<div class="login-content">
+  <div class="login-ui">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <h1>登录</h1>
+      <div class="user">
+        <p class="input-title">邮箱</p>
+        <input type="email" formControlName="email">
+        <div class="passwd">
+          <p class="input-title">密码</p>
+          <input type="password" formControlName="password"></div>
+        <p class="fail" [hidden]="success">用户名或密码错误</p>
+        <div class="submit">
+          <button class="login-btn" type="submit" [disabled]="!loginForm.valid">登录</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

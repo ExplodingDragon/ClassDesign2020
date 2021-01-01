@@ -11,7 +11,7 @@ export class IndexPageComponent implements OnInit {
   constructor(private titleService: TitleService) { }
 
   ngOnInit(): void {
-    this.titleService.setTitle('Hello World');
+    this.titleService.setTitle('欢迎');
   }
 
 }

@@ -6,6 +6,7 @@ import i.design.handlers.result.Result
 import i.design.handlers.result.ResultUtils
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpStatus
+import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.validation.FieldError
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -14,11 +15,9 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.servlet.DispatcherServlet
 import org.springframework.web.servlet.NoHandlerFoundException
-import org.springframework.web.servlet.config.annotation.EnableWebMvc
 import javax.annotation.PostConstruct
 import javax.annotation.Resource
 
-@EnableWebMvc
 @Configuration
 @RestControllerAdvice
 class ExceptionHandler {
@@ -29,6 +28,7 @@ class ExceptionHandler {
     private fun configureDispatcherServlet() {
         dispatcherServlet.setThrowExceptionIfNoHandlerFound(true)
     }
+
     private val logger = getLogger()
 
     @ResponseBody
@@ -57,12 +57,20 @@ class ExceptionHandler {
     }
 
     @ResponseBody
+    @ExceptionHandler(value = [HttpMessageNotReadableException::class])
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    fun postFormatError(e: Exception): Result {
+        logger.errorThrowable("内容不合法", e)
+        return ResultUtils.Fail.badRequest("内容不合法！")
+    }
+
+    @ResponseBody
     @ExceptionHandler(value = [MethodArgumentNotValidException::class])
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     fun formatCheckExceptionHandler(e: MethodArgumentNotValidException): Result {
         logger.warn("客户端请求错误：{} ", e.message)
         val builder = StringBuilder()
-        e.bindingResult.allErrors.forEach { it ->
+        e.bindingResult.allErrors.forEach {
             val param = if (it is FieldError) {
                 it.field
             } else {

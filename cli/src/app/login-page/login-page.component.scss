@@ -1,0 +1,45 @@
+.login-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: white;
+  transform: translateX(-50%) translateY(-50%);
+  border: #717171 1px solid;
+  padding: 10px 20px;
+  border-radius: 3px;
+
+  h1 {
+    text-align: center;
+    font-size: large;
+  }
+
+  .login-btn {
+    text-align: center;
+    display: block;
+    width: 80%;
+    padding: 5px;
+    margin: 20px auto;
+    border: black 1px solid;
+  }
+
+  input {
+    width: 233px;
+    border: black 1px solid;
+    padding: 4px;
+  }
+
+  .fail {
+    text-align: center;
+    padding: 3px;
+    color: red;
+  }
+
+  .input-title {
+    margin: 8px;
+  }
+}
+
+* {
+  line-height: 1.3333;
+  font-family: '微软雅黑', serif;
+}

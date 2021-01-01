@@ -11,7 +11,7 @@ interface ITokenService<T : Annotation> {
         return try {
             verifyToken(token, tokenInfo as T)
         } catch (e: Exception) {
-            logger.debug("token 解析错误！ {}", e.message)
+            logger.warn("token 解析错误！ {}", e.message)
             false
         }
     }
@@ -30,6 +30,13 @@ interface ITokenService<T : Annotation> {
      * @return Long
      */
     fun getUserIdByToken(token: String): Long
+
+    /**
+     * 根据用户创建 token
+     * @param id Long
+     * @return String
+     */
+    fun createTokenByUserId(id: Long): String
 
     /**
      *  监听的注解

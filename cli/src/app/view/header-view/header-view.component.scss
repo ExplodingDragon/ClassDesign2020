@@ -1,0 +1,39 @@
+.header {
+  height: 64px;
+
+
+  .header-root {
+    height: 100%;
+    max-width: 1120px;
+    padding: 0 50px;
+    margin: 0 auto;
+    color: white;
+
+    .icon {
+      display: inline-block;
+
+      .title {
+        display: inline-block;
+        height: 64px;
+        font-size: large;
+        line-height: 64px;
+      }
+    }
+
+    .login-root {
+      float: right;
+      height: 100%;
+
+      p {
+        display: inline-block;
+        height: 64px;
+        line-height: 64px;
+        padding: 0 20px;
+      }
+
+      p:hover {
+        background: rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+}

@@ -1,9 +1,9 @@
 package i.design.handlers
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.github.openEdgn.logger4k.getLogger
 import i.design.handlers.result.Result
 import i.design.handlers.result.ResultUtils
+import org.springframework.context.annotation.Configuration
 import org.springframework.core.MethodParameter
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice
 
 
+@Configuration
 @RestControllerAdvice
 class ResponseAdvice : ResponseBodyAdvice<Any> {
+
     override fun supports(returnType: MethodParameter, converterType: Class<out HttpMessageConverter<*>>): Boolean {
         return returnType.parameterType != String::class.java
     }
@@ -32,14 +34,15 @@ class ResponseAdvice : ResponseBodyAdvice<Any> {
         val result = if (body == null) {
             ResultUtils.Fail.nullPoint()
         } else {
-            if (!requestPath.startsWith("/api/")) {
+            if (!requestPath.startsWith("/api/") &&
+                !requestPath.startsWith("/pages/")
+            ) {
                 formatData(body)
             } else {
                 if (body is Result) {
                     formatData(body)
                 } else {
                     ResultUtils.ok(formatData(body))
-
                 }
             }
         }

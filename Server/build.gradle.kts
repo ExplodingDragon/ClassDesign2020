@@ -29,8 +29,6 @@ configurations {
     }
 }
 
-val queryDSLVersion = "4.4.0"
-
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
@@ -45,7 +43,6 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     implementation("org.springdoc:springdoc-openapi-kotlin:1.5.2")
     implementation("org.springdoc:springdoc-openapi-ui:1.5.2")
-    implementation("org.springdoc:springdoc-openapi-data-rest:1.5.2")
     implementation("com.github.OpenEdgn.Logger4K:core:1.3.0")
     implementation("com.github.OpenEdgn.Logger4K:logger-slf4j:1.3.0")
     implementation("com.github.OpenEdgn:Security4k:1.0.0")
@@ -57,7 +54,7 @@ dependencies {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict","-Xemit-jvm-type-annotations")
+        freeCompilerArgs = listOf("-Xjsr305=strict", "-Xemit-jvm-type-annotations")
         jvmTarget = "11"
     }
 }

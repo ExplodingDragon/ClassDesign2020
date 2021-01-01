@@ -1,18 +1,14 @@
 package i.design.handlers
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.CachingConfigurerSupport
 import org.springframework.cache.annotation.EnableCaching
-import org.springframework.context.annotation.Configuration
-import org.springframework.data.redis.serializer.StringRedisSerializer
-
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer
-
-import org.springframework.data.redis.core.RedisTemplate
-
-import org.springframework.data.redis.connection.RedisConnectionFactory
-
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.data.redis.connection.RedisConnectionFactory
+import org.springframework.data.redis.core.RedisTemplate
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer
+import org.springframework.data.redis.serializer.StringRedisSerializer
 
 
 @Configuration
@@ -22,7 +18,7 @@ class RedisConfig : CachingConfigurerSupport() {
     private lateinit var redisConnectionFactory: RedisConnectionFactory
 
     @Bean
-    fun redisTemplate(): RedisTemplate<String, Any>{
+    fun redisTemplate(): RedisTemplate<String, Any> {
         val redisTemplate = RedisTemplate<String, Any>()
         // 注入数据源
         redisTemplate.setConnectionFactory(redisConnectionFactory)

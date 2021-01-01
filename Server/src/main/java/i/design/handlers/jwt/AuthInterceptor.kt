@@ -42,7 +42,7 @@ class AuthInterceptor : HandlerInterceptor {
     }
 
     companion object {
-        private const val headerName = "Authorization"
+        private const val headerName = "authorization"
         fun getToken(request: HttpServletRequest): String {
             return request.getHeader(headerName) ?: throw ApplicationExceptions.forbidden(request.requestURI)
         }

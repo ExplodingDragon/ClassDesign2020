@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface GlobalConfigRepository : CrudRepository<GlobalConfigEntity, String>, QuerydslPredicateExecutor<GlobalConfigEntity> {
+interface GlobalConfigRepository : CrudRepository<GlobalConfigEntity, String> {
 }

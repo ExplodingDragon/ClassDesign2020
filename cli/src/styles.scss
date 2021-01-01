@@ -1,1 +1,227 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+//:root {
+//  --primary-color: #3f52bd;
+//  --primary-color-dark: #333f9d;
+//  --accent-color: #ff4186;
+//}
+
+.max-height {
+  display: inline-block;
+  height: 100%;
+  line-height: 100%;
+}
+
+html {
+  color: #000;
+  background: #fff;
+}
+
+.btn-hover {
+  cursor: pointer;
+}
+
+.btn-hover:hover {
+  background-color: rgba(0,0,0,.2);
+}
+
+a {
+  text-decoration: unset;
+  color: black;
+}
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+fieldset,
+img {
+  border: 0;
+}
+
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
+  font-style: normal;
+  font-weight: normal;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+caption,
+th {
+  text-align: left;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+q:before,
+q:after {
+  content: "";
+}
+
+abbr,
+acronym {
+  border: 0;
+  font-variant: normal;
+}
+
+sup {
+  vertical-align: text-top;
+}
+
+sub {
+  vertical-align: text-bottom;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  *font-size: 100%;
+}
+
+legend {
+  color: #000;
+}
+
+.clear-fix::before,
+.clear-fix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.hide {
+  display: none;
+  visibility: hidden;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+html {
+  box-sizing: border-box;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: rgba(2, 3, 3, 0.09);
+}
+
+::-webkit-scrollbar-track {
+  background: hsla(210, 8%, 51%, 0.09);
+}
+
+//::selection {
+//  background-color: var(--accent-color);
+//  color: #fff;
+//  text-shadow: none;
+//}
+
+.dark-primary-color {
+  background: #689F38;
+}
+
+.default-primary-color {
+  background: #8BC34A;
+}
+
+.light-primary-color {
+  background: #DCEDC8;
+}
+
+.text-primary-color {
+  color: #212121;
+}
+
+
+.dark-text-primary-color {
+  color: #EEEEEE;
+}
+
+
+
+.accent-color {
+  background: #FF4081;
+}
+
+.primary-text-color {
+  color: #212121;
+}
+
+.secondary-text-color {
+  color: #757575;
+}
+
+.divider-color {
+  border-color: #BDBDBD;
+}
+
+.in-line {
+  display: inline-block;
+}
+input,button{
+  background:none;
+  outline:none;
+  border:none;
+}

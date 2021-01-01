@@ -18,8 +18,11 @@ class GlobalConfigServiceImpl : IGlobalConfigService {
     @Resource
     private lateinit var globalConfigRepository: GlobalConfigRepository
 
+    private val rKey = "design_config"
+
     override fun getConfig(key: String, defaultValue: String): String {
-        val cacheData = redisTemplate.opsForHash<String, String>().get("design_config", key)
+        val opsForHash = redisTemplate.opsForHash<String, String>()
+        val cacheData = opsForHash.get(rKey, key)
         if (cacheData != null) {
             return cacheData
         }
@@ -27,13 +30,15 @@ class GlobalConfigServiceImpl : IGlobalConfigService {
         return if (sqlData.isEmpty) {
             defaultValue
         } else {
-            sqlData.get().data
+            val v = sqlData.get().v
+            opsForHash.put(rKey, key, v)
+            v
         }
     }
 
     override fun setConfig(key: String, value: String): String {
         globalConfigRepository.save(GlobalConfigEntity(key, value))
-        redisTemplate.opsForHash<String, String>().put("design_config", key, value)
+        redisTemplate.opsForHash<String, String>().put(rKey, key, value)
         return value
     }
 }

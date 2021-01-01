@@ -1,0 +1,36 @@
+.header {
+  height: 100px;
+  background: red;
+}
+
+.root {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: white;
+  transform: translateX(-50%) translateY(-50%);
+  padding: 10px 20px;
+
+  h2 {
+    font-size: 50px;
+  }
+
+  h3 {
+    font-size: 30px;
+  }
+
+  h2, h3 {
+    margin: 20px;
+    text-align: center;
+  }
+
+  .start {
+    color: white;
+    
+    display: block;
+    margin: 0 auto;
+    padding: 12px 20px;
+    outline: 0;
+
+  }
+}
