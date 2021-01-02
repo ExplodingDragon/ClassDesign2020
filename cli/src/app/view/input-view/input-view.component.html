@@ -1,0 +1,23 @@
+<div class="dialog-panel" *ngIf="dialog.show">
+  <div class="dialog-root">
+    <h2 class="title">{{dialog.title}}</h2>
+
+
+    <div class="input-content">
+      <table class="content">
+        <tr *ngFor="let item of dialog.content">
+          <td><h3 class="itemName">{{item.title}}</h3>
+          </td>
+          <td><input [type]="item.type" [(ngModel)]="item.value" [disabled]="!item.editable">
+          </td>
+        </tr>
+      </table>
+
+    </div>
+    <div class="submit-root">
+      <button class="btn submit btn-hover  warn-btn" (click)="save()" type="submit">提交</button>
+      <button class="btn exit btn-hover" (click)="hide()">退出</button>
+    </div>
+
+  </div>
+</div>

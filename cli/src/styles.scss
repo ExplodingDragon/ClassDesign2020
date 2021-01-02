@@ -225,3 +225,11 @@ input,button{
   outline:none;
   border:none;
 }
+.warn-btn{
+  background: red !important;
+  color: white !important;;
+}
+.warn-btn:hover{
+  background: #d40000 !important;
+  color: white !important;;
+}

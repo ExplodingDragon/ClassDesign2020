@@ -6,6 +6,7 @@ import i.design.modules.token.services.ITokenService
 import i.design.modules.users.models.input.LoginInputModel
 import i.design.modules.users.models.input.RegisterInputModel
 import i.design.modules.users.models.output.LoginStatusModel
+import i.design.modules.users.models.output.LogoutStatusModel
 import i.design.modules.users.models.output.RegisterStatusModel
 import i.design.modules.users.models.rest.UserModel
 import i.design.modules.users.repositories.UserRepository
@@ -13,6 +14,7 @@ import i.design.modules.users.services.IAuthService
 import i.design.modules.users.services.IUserService
 import i.design.utils.SnowFlake
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
 import javax.annotation.Resource
 
 @Service("auth")
@@ -38,10 +40,18 @@ class AuthServiceImpl : IAuthService {
         } else {
             findOneByEmail.get().run {
                 if (encodedPasswd == password) {
+                    if (!canLogin) {
+                        throw ApplicationExceptions.forbidden("此账户已被禁用！")
+                    }
+                    lastLoginDate = LocalDateTime.now()
+                    userRepository.save(this)
+
                     return LoginStatusModel(
                         name = userDetail.name,
                         image = userDetail.imageUrl,
-                        token = tokenService.createTokenByUserId(id), email = email
+                        token = tokenService.createTokenByUserId(id), email = email[0] + "****" +
+                                email.substring(email.lastIndexOf("@")),
+                        admin = admin
                     )
                 } else {
                     throw ApplicationExceptions.badRequest("用户名或密码错误！")
@@ -72,5 +82,11 @@ class AuthServiceImpl : IAuthService {
         } else {
             throw ApplicationExceptions.badRequest("该邮箱已被注册！")
         }
+    }
+
+    override fun logout(userId: Long): LogoutStatusModel {
+        tokenService.clearTokenById(userId)
+        return LogoutStatusModel("已注销")
+
     }
 }

@@ -33,11 +33,15 @@ class TokenServiceImpl : ITokenService<Token> {
         val userCache = redisTemplate.opsForHash<String, String>().get(key, "userId") ?: return false
         redisTemplate.expire(key, 1, TimeUnit.DAYS)
         // 更新过期时间
-        return if (tokenInfo.admin) {
-            val selectOneById = userService.selectOneById(userCache.toLong())
-            return selectOneById.admin
+        val selectOneById = userService.selectOneById(userCache.toLong())
+        return if (selectOneById.canLogin) {
+            if (tokenInfo.admin) {
+                return selectOneById.admin
+            } else {
+                true
+            }
         } else {
-            true
+            false
         }
     }
 
@@ -58,6 +62,11 @@ class TokenServiceImpl : ITokenService<Token> {
         )
         redisTemplate.expire(key, 1, TimeUnit.DAYS)
         return "Bearer $token"
+    }
+
+
+    override fun clearTokenById(userId: Long) {
+
     }
 
     override val verifyAnnotation = Token::class

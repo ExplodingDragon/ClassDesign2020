@@ -3,6 +3,7 @@ package i.design.modules.users.services
 import i.design.modules.users.models.input.LoginInputModel
 import i.design.modules.users.models.input.RegisterInputModel
 import i.design.modules.users.models.output.LoginStatusModel
+import i.design.modules.users.models.output.LogoutStatusModel
 import i.design.modules.users.models.output.RegisterStatusModel
 
 /**
@@ -23,6 +24,13 @@ interface IAuthService {
      *
      */
     fun register(registerInfo: RegisterInputModel): RegisterStatusModel
+
+    /**
+     *
+     * 注销账户
+     *
+     */
+    fun logout(userId: Long): LogoutStatusModel
 
 
 }

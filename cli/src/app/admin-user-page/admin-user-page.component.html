@@ -1,0 +1,40 @@
+<app-header-view [showMenu]="true" [menuIndex]="3"></app-header-view>
+<app-input-view [dialog]="dialog"></app-input-view>
+<div class="panel">
+  <div class="panel-root">
+    <h1>用户管理</h1>
+  </div>
+  <div class="panel-main">
+    <button class="create btn-hover warn-btn edit" (click)="create()">创建用户</button>
+
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>用户名</th>
+        <th>邮箱</th>
+        <th>性别</th>
+        <th>注册日期</th>
+        <th>用户组</th>
+        <th>状态</th>
+        <th>管理</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of data">
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.email}}</td>
+        <td>{{item.sex}}</td>
+        <td>{{item.regiserDate}}</td>
+        <td>{{item.admin ? '管理员' : '普通用户'}}</td>
+        <td>{{item.canLogin ? '正常登录' : '已锁定'}}</td>
+        <td>
+          <button class="edit btn-hover" (click)="editUser(item)">修改信息</button>
+          <button class="edit btn-hover warn-btn" (click)="deleteUser(item)">删除用户</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

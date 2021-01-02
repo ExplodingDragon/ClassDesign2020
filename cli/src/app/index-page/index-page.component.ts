@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TitleService} from '../../services/title.service';
+import {ConfigService} from '../../services/config.service';
 
 @Component({
   selector: 'app-index-page',
@@ -8,10 +9,17 @@ import {TitleService} from '../../services/title.service';
 })
 export class IndexPageComponent implements OnInit {
 
-  constructor(private titleService: TitleService) { }
+  constructor(
+    private titleService: TitleService,
+    private configService: ConfigService
+  ) {
+  }
 
   ngOnInit(): void {
     this.titleService.setTitle('欢迎');
   }
 
+  isLogin(): boolean {
+    return this.configService.isLogin();
+  }
 }

@@ -1,0 +1,42 @@
+.panel {
+  padding: 10px;
+
+  h1 {
+    font-size: 24px;
+  }
+
+  table {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    border-spacing: 1px;
+  }
+
+  table, th, td {
+    border: 1px solid #959595;
+  }
+
+  tr:hover {
+    background: rgba(0, 0, 0, .2);
+  }
+
+  th {
+    padding: 0 20px;
+    display: table-cell;
+    text-align: center;
+  }
+
+  .create{
+    float: right;
+  }
+
+  .panel-main {
+    padding: 30px;
+  }
+
+  .edit {
+    border: 1px solid #959595;
+    margin: 3px;
+    padding: 5px 10px;
+  }
+}

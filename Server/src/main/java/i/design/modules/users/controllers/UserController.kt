@@ -1,12 +1,11 @@
 package i.design.modules.users.controllers
 
+import i.design.handlers.jwt.UserId
+import i.design.modules.token.models.annotations.Token
 import i.design.modules.users.models.input.LoginInputModel
 import i.design.modules.users.models.input.RegisterInputModel
 import i.design.modules.users.services.IAuthService
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import javax.annotation.Resource
 import javax.validation.Valid
 
@@ -29,5 +28,12 @@ class UserController {
         produces = ["application/json"]
     )
     fun register(@RequestBody @Valid registerInfo: RegisterInputModel) = authService.register(registerInfo)
+
+    @Token(false)
+    @GetMapping(
+        "logout",
+        produces = ["application/json"]
+    )
+    fun logout(@UserId id: Long) = authService.logout(id)
 
 }

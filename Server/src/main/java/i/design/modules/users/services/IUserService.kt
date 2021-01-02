@@ -9,4 +9,5 @@ interface IUserService {
     fun insert(user: UserModel): RestStatus<Long>
     fun update(id: Long, user: UserModel): RestStatus<Long>
     fun delete(id: Long): RestStatus<Long>
+    fun length(): RestStatus<Long>
 }

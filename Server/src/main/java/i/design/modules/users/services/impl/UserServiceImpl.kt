@@ -8,6 +8,7 @@ import i.design.modules.users.models.entities.UserEntity
 import i.design.modules.users.models.rest.UserModel
 import i.design.modules.users.repositories.UserRepository
 import i.design.modules.users.services.IUserService
+import i.design.utils.LocalDateTimeUtils
 import i.design.utils.SnowFlake
 import i.design.utils.rest.RestStatus
 import org.springframework.data.domain.PageRequest
@@ -26,13 +27,23 @@ class UserServiceImpl : IUserService {
     private lateinit var userRepository: UserRepository
     override fun selectAll(index: Int, length: Int): List<UserModel> {
         val toList = userRepository.findAll(PageRequest.of(index, length)).map {
-            UserModel(
-                it.id, it.email, it.userDetail.sex, it.userDetail.name, it.userDetail.imageUrl,
-                admin = it.admin,
-                canLogin = it.canLogin
-            )
+            entity2Model(it)
         }.toList()
         return toList
+    }
+
+    fun entity2Model(entity: UserEntity): UserModel {
+        return entity.let {
+            UserModel(
+                it.id, it.email,
+                it.userDetail.sex,
+                it.userDetail.name,
+                it.userDetail.imageUrl,
+                admin = it.admin,
+                canLogin = it.canLogin,
+                regiserDate = LocalDateTimeUtils.format(it.registerDate)
+            )
+        }
     }
 
     override fun selectOneById(id: Long): UserModel {
@@ -41,15 +52,14 @@ class UserServiceImpl : IUserService {
             throw ApplicationExceptions.badRequest("无id 为 $id 的用户。")
         }
         val get = data.get()
-        val userDetail = get.userDetail
-        return UserModel(
-            get.id, email = get.email, sex = userDetail.sex,
-            name = userDetail.name, image = userDetail.imageUrl,
-            admin = get.admin, canLogin = get.canLogin
-        )
+        return entity2Model(get)
     }
 
     override fun insert(user: UserModel): RestStatus<Long> {
+        val userDetail = UserDetailsEntity()
+        userDetail.name = user.name
+        userDetail.sex = user.sex
+        userDetail.imageUrl = user.image
         return UserEntity(
             id = snowFlake.nextId(),
             email = user.email,
@@ -58,25 +68,34 @@ class UserServiceImpl : IUserService {
             canLogin = user.canLogin,
             registerDate = LocalDateTime.now(),
             lastLoginDate = LocalDateTime.now(),
-            userDetail = UserDetailsEntity()
+            userDetail = userDetail
         ).run { RestStatus(true, userRepository.save(this).id) }
     }
 
     override fun update(id: Long, user: UserModel): RestStatus<Long> {
-        return UserEntity(
-            id = user.id,
-            email = user.email,
-            password = user.password.sha384Sum(),
-            admin = false,
-            canLogin = false,
-            registerDate = LocalDateTime.now(),
-            lastLoginDate = LocalDateTime.now(),
-            userDetail = UserDetailsEntity()
-        ).run { RestStatus(true, userRepository.save(this).id) }
+        val findById = userRepository.findById(id)
+        if (findById.isEmpty) {
+            throw ApplicationExceptions.badRequest("无此 ID");
+        }
+        val get = findById.get()
+        get.email = user.email
+        get.admin = user.admin
+        if (user.password.isNotEmpty()) {
+            get.password = user.password.sha384Sum()
+        }
+        get.canLogin = user.canLogin
+        get.userDetail.name = user.name
+        get.userDetail.sex = user.sex
+        get.userDetail.imageUrl = user.image
+        return get.run { RestStatus(true, userRepository.save(this).id) }
     }
 
     override fun delete(id: Long): RestStatus<Long> {
         userRepository.deleteById(id)
         return RestStatus(true, id)
+    }
+
+    override fun length(): RestStatus<Long> {
+        return RestStatus(true, userRepository.count())
     }
 }

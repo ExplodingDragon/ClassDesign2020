@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {TitleService} from '../../services/title.service';
 import {FormBuilder, Validators} from '@angular/forms';
-import {UrlService} from '../../services/url.service';
-import {HttpClient} from '@angular/common/http';
-import {catchError} from 'rxjs/operators';
-import {Result} from '../../models/global.model';
 import {Router} from '@angular/router';
+import {HttpService} from '../../services/http.service';
+import {ConfigService} from '../../services/config.service';
 
 @Component({
   selector: 'app-login-page',
@@ -13,11 +11,12 @@ import {Router} from '@angular/router';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
+
   constructor(private titleService: TitleService,
               private fb: FormBuilder,
-              private http: HttpClient,
               private route: Router,
-              private urlService: UrlService) {
+              private httpService: HttpService,
+              private configService: ConfigService) {
 
   }
 
@@ -32,21 +31,19 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle('登录');
-
   }
 
 
   onSubmit(): void {
-    this.http.post<Result<string>>(this.urlService.loginUrl, this.loginForm.value).pipe(
-      catchError(async (err) => {
-          this.success = false;
+    this.httpService.post<string>('/pages/login', this.loginForm.value
+      , (data) => {
+        if (data) {
+          alert('登录成功！' + data.name);
+          this.configService.save(data);
+          this.route.navigate(['/index']).then(r => console.log(data));
         }
-      )).subscribe(data => {
-      console.log('{}', data);
-      if (data) {
-        this.route.navigate(['/index']);
-      }
-
-    });
+      }, (data) => {
+        alert(data);
+      });
   }
 }

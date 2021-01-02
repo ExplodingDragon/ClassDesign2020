@@ -39,6 +39,12 @@ interface ITokenService<T : Annotation> {
     fun createTokenByUserId(id: Long): String
 
     /**
+     * 根据用户id 清除 tokem
+     * @param userId Long
+     */
+    fun clearTokenById(userId: Long)
+
+    /**
      *  监听的注解
      */
     val verifyAnnotation: KClass<out T>

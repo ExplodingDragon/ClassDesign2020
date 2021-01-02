@@ -8,7 +8,11 @@ import {ErrorPageComponent} from './error-page/error-page.component';
 import {LoginPageComponent} from './login-page/login-page.component';
 import {HeaderViewComponent} from './view/header-view/header-view.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { RegisterPageComponent } from './register-page/register-page.component';
+import { PanelPageComponent } from './panel-page/panel-page.component';
+import { AdminUserPageComponent } from './admin-user-page/admin-user-page.component';
+import { InputViewComponent } from './view/input-view/input-view.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +20,11 @@ import {ReactiveFormsModule} from '@angular/forms';
     IndexPageComponent,
     ErrorPageComponent,
     LoginPageComponent,
-    HeaderViewComponent
+    HeaderViewComponent,
+    RegisterPageComponent,
+    PanelPageComponent,
+    AdminUserPageComponent,
+    InputViewComponent
   ],
   imports: [
     BrowserModule,
@@ -24,6 +32,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     AppRoutingModule,
     FontAwesomeModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

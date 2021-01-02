@@ -1,11 +1,26 @@
 <header class="header default-primary-color clear-fix">
   <div class="header-root">
     <div class="icon">
-      <h1 class="title btn-hover" routerLink="/">在线问卷调查系统</h1>
+      <h1 class="title btn-hover" *ngIf="!showMen()" routerLink="/">在线问卷调查系统</h1>
     </div>
-    <div class="login-root">
-      <p class="login-btn btn-hover" routerLink="/login">登录</p>
-      <p class="register btn-hover" routerLink="/register">注册</p>
+    <div class="menu" *ngIf="showMen()">
+      <ul class="menu-list">
+        <!--        <li class="btn-hover">问卷统计</li>-->
+        <li class="btn-hover" *ngFor="let menu of menus; let i=index"
+            [routerLink]="menu.href" [ngClass]="i === selectIndex()?'selected' : ''"
+            [ngStyle]="(menu.admin && !notAdmin())?{display:'none'}:''"
+        >{{menu.title}}</li>
+      </ul>
+    </div>
+    <div class="right">
+      <div class="user-info" *ngIf="!noLogin()">
+        <p class="user-name btn-hover" routerLink="/panel">用户：{{name()}}</p>
+        <p class="btn-hover" (click)="logout()">注销</p>
+      </div>
+      <div class="login-root" *ngIf="noLogin()">
+        <p class="login-btn btn-hover" routerLink="/login">登录</p>
+        <p class="register btn-hover" routerLink="/register">注册</p>
+      </div>
     </div>
   </div>
 </header>

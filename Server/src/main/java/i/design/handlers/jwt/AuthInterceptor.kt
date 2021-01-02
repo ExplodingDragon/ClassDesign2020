@@ -31,7 +31,11 @@ class AuthInterceptor : HandlerInterceptor {
 
         val annotation = tokenService.verifyAnnotation.java
         if (method.isAnnotationPresent(annotation) && tokenService.verifyToken0(
-                getToken(request),
+                try {
+                    getToken(request)
+                } catch (e: Exception) {
+                    throw ApplicationExceptions.forbidden(request.requestURI)
+                },
                 method.getAnnotation(annotation)
             )
         ) {

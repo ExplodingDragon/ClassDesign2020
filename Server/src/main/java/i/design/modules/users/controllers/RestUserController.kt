@@ -65,5 +65,13 @@ class RestUserController {
     @Token(true)
     @DeleteMapping("{id}", produces = ["application/json"])
     fun deleteUser(@PathVariable id: Long) = userService.delete(id)
+    @Operation(
+        summary = "查询用户数目", tags = ["user"], security = [
+            SecurityRequirement(name = "auth")
+        ]
+    )
+    @Token(true)
+    @GetMapping("length", produces = ["application/json"])
+    fun length() = userService.length()
 
 }

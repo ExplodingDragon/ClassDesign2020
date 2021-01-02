@@ -10,6 +10,7 @@
     color: white;
 
     .icon {
+      float: left;
       display: inline-block;
 
       .title {
@@ -20,20 +21,48 @@
       }
     }
 
-    .login-root {
+
+    .menu {
+      display: inline-block;
+      height: 100%;
+      padding: 0 20px;
+      float: left;
+
+      .menu-list {
+        height: 100%;
+
+        li {
+          padding: 0 20px;
+          display: inline-block;
+          height: 100%;
+          line-height: 64px;
+        }
+
+        .selected {
+          background: rgba(0, 0, 0, .2);
+        }
+
+      }
+    }
+
+    .right {
       float: right;
       height: 100%;
+    }
 
-      p {
-        display: inline-block;
-        height: 64px;
-        line-height: 64px;
-        padding: 0 20px;
-      }
+    p {
+      display: inline-block;
+      height: 64px;
+      line-height: 64px;
+      padding: 0 20px;
+    }
 
-      p:hover {
-        background: rgba(0, 0, 0, 0.2);
-      }
+    p:hover {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .login-root {
+      height: 100%;
     }
   }
 }
