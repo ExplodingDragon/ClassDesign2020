@@ -4,6 +4,7 @@ import i.design.modules.users.models.rest.UserModel
 import i.design.utils.rest.RestStatus
 
 interface IUserService {
+    fun isAdmin(userId: Long): Boolean
     fun selectAll(index: Int, length: Int): List<UserModel>
     fun selectOneById(id: Long): UserModel
     fun insert(user: UserModel): RestStatus<Long>

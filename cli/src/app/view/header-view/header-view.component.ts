@@ -22,7 +22,7 @@ export class HeaderViewComponent implements OnInit {
 
   paperclip = faPaperclip;
 
-  @Input() showMenu = false;
+  @Input() showMenu = 'false';
   @Input() menuIndex = '0';
 
   menus = [
@@ -30,10 +30,10 @@ export class HeaderViewComponent implements OnInit {
       title: '问卷统计', href: '/panel', admin: false
     },
     {
-      title: '问卷管理', href: '/', admin: false
+      title: '问卷管理', href: '/quest', admin: false
     },
     {
-      title: '模板管理', href: '/', admin: false
+      title: '创建问卷', href: '/create', admin: true
     },
     {
       title: '用户管理', href: '/users', admin: true
@@ -45,7 +45,7 @@ export class HeaderViewComponent implements OnInit {
   }
 
   showMen(): boolean {
-    return this.showMenu;
+    return Boolean(this.showMenu);
   }
 
   ngOnInit(): void {

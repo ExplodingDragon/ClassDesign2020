@@ -1,0 +1,108 @@
+.root {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title {
+  float: left;
+  font-size: 32px;
+}
+
+.save-content {
+  float: right;
+
+}
+
+.btn {
+  display: inline-block;
+  padding: 8px 20px;
+  border: #a3a3a3 1px solid;
+}
+
+.quest-main {
+  margin-top: 20px;
+  padding: 10px;
+  clear: both;
+
+  .title-content {
+    margin: 0 auto;
+    .qst-title {
+      font-size: 24px;
+      height: 24px;
+      float: left;
+      line-height: 24px;
+      display: inline-block;
+    }
+
+    .input {
+      float: left;
+      display: inline-block;
+      width: 60%;
+      height: 20px;
+      tab-size: 17px;
+      line-height: 18px;
+      border: #717171 1px solid;
+      padding: 4px;
+    }
+    .allow-guest{
+      float: right;
+    }
+  }
+
+  .qst-items {
+    padding: 10px;
+    margin: 10px;
+    .qst-option {
+      margin-right: 5px;
+      float: right;
+    }
+
+
+  }
+
+}
+.options{
+  .option{
+    padding: 10px;
+    margin: 5px;
+    border: #717171 1px solid;
+    div{
+      padding: 10px;
+    }
+    h4{
+      font-size: 20px;
+      display: inline-block;
+    }
+    .option-title{
+
+      .input{
+        border: #717171 1px solid;
+        width: 50%;
+      }
+    }
+    .select{
+      width: 50%;
+    }
+  }
+  .option-items{
+    border: #717171 1px solid;
+    .btn{
+      padding: 4px 13px;
+      margin-left: 10px;
+    }
+    .option-item{
+      border: #717171 1px solid;
+      margin: 5px;
+      h5{
+        display: inline-block;
+      }
+      .input{
+        margin-left: 20px;
+        border: #717171 1px solid;
+        width: 50%;
+      }
+    }
+  }
+
+}

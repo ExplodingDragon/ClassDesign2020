@@ -9,10 +9,12 @@ import {LoginPageComponent} from './login-page/login-page.component';
 import {HeaderViewComponent} from './view/header-view/header-view.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { RegisterPageComponent } from './register-page/register-page.component';
-import { PanelPageComponent } from './panel-page/panel-page.component';
-import { AdminUserPageComponent } from './admin-user-page/admin-user-page.component';
-import { InputViewComponent } from './view/input-view/input-view.component';
+import {RegisterPageComponent} from './register-page/register-page.component';
+import {PanelPageComponent} from './panel-page/panel-page.component';
+import {AdminUserPageComponent} from './admin-user-page/admin-user-page.component';
+import {InputViewComponent} from './view/input-view/input-view.component';
+import {QuestPageComponent} from './quest-page/quest-page.component';
+import {QuestCreatePageComponent} from './quest-create-page/quest-create-page.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,10 @@ import { InputViewComponent } from './view/input-view/input-view.component';
     RegisterPageComponent,
     PanelPageComponent,
     AdminUserPageComponent,
-    InputViewComponent
+    InputViewComponent,
+    QuestPageComponent,
+    HeaderViewComponent,
+    QuestCreatePageComponent
   ],
   imports: [
     BrowserModule,

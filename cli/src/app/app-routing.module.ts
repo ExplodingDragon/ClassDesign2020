@@ -6,6 +6,8 @@ import {LoginPageComponent} from './login-page/login-page.component';
 import {RegisterPageComponent} from './register-page/register-page.component';
 import {PanelPageComponent} from './panel-page/panel-page.component';
 import {AdminUserPageComponent} from './admin-user-page/admin-user-page.component';
+import {QuestPageComponent} from './quest-page/quest-page.component';
+import {QuestCreatePageComponent} from './quest-create-page/quest-create-page.component';
 
 const routes: Routes = [
   {
@@ -24,7 +26,13 @@ const routes: Routes = [
     path: 'panel', component: PanelPageComponent
   },
   {
+    path: 'create', component: QuestCreatePageComponent
+  },
+  {
     path: 'users', component: AdminUserPageComponent
+  },
+  {
+    path: 'quest', component: QuestPageComponent
   },
   {
     path: '404', component: ErrorPageComponent

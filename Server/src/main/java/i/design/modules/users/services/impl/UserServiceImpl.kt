@@ -23,6 +23,15 @@ class UserServiceImpl : IUserService {
 
     private val logger = getLogger()
 
+    override fun isAdmin(userId: Long): Boolean {
+        val findById = userRepository.findById(userId)
+        if (findById.isEmpty) {
+            throw ApplicationExceptions.badRequest("未找到 id")
+        } else {
+            return findById.get().admin
+        }
+    }
+
     @Resource
     private lateinit var userRepository: UserRepository
     override fun selectAll(index: Int, length: Int): List<UserModel> {
