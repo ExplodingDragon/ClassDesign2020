@@ -46,4 +46,29 @@ export class QuestCreatePageComponent implements OnInit {
       content: '选项'
     });
   }
+
+  deleteQuestion(i: number): void {
+    this.input.content.splice(i, 1);
+  }
+
+  deleteQuestionItem(i: number, j: number): void {
+    this.input.content[i].content.splice(j, 1);
+  }
+
+  save() {
+    if (this.input.content.length === 0) {
+      alert('问卷为空！');
+      return;
+    }
+    for (let i = 0; i < this.input.content.length; i++) {
+      const d = this.input.content[i];
+      if (d.optionType !== 'INPUT') {
+        if (d.content.length === 0) {
+          alert('问卷题目' + (i + 1) + '中，没有选项！');
+          return;
+        }
+      }
+    }
+    console.log(this.input);
+  }
 }

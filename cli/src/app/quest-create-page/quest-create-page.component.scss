@@ -67,6 +67,12 @@
     padding: 10px;
     margin: 5px;
     border: #717171 1px solid;
+    .option-header{
+      .btn{
+        float: right;
+        padding: 5px 12px;
+      }
+    }
     div{
       padding: 10px;
     }
@@ -75,7 +81,6 @@
       display: inline-block;
     }
     .option-title{
-
       .input{
         border: #717171 1px solid;
         width: 50%;
@@ -101,6 +106,10 @@
         margin-left: 20px;
         border: #717171 1px solid;
         width: 50%;
+      }
+      .btn{
+        float: right;
+        padding: 4px 14px;
       }
     }
   }

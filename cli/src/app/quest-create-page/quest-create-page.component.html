@@ -6,7 +6,7 @@
   <h2 class="title ">创建问卷</h2>
   <div class="quest-content">
     <div class="save-content ">
-      <button class="btn btn-hover warn-btn">保存</button>
+      <button class="btn btn-hover warn-btn" (click)="save()" >保存</button>
     </div>
     <div class="quest-main">
       <div class="title-content clear-fix">
@@ -25,7 +25,11 @@
 
         <div class="options clear-fix">
           <div class="option" *ngFor="let data of input.content;let i = index">
-            <h4>选项 {{i + 1}} ：</h4>
+            <div class="option-header">
+              <h4>选项 {{i + 1}} ：</h4>
+              <button class="btn btn-hover warn-btn" (click)="deleteQuestion(i)">删除</button>
+            </div>
+
             <div class="option-title">
               <h4>标题：</h4>
               <label><input type="text" class="input" [(ngModel)]="data.title"></label>
@@ -33,18 +37,20 @@
             <div class="option-type">
               <h4>类型：</h4>
               <label for="group"></label><select class="select" id="group" [(ngModel)]="data.optionType">
-                <option value="ONE_SELECT">单选</option>
-                <option value="MANY_SELECT">多选</option>
-                <option value="INPUT">填空</option>
-              </select>
+              <option value="ONE_SELECT">单选</option>
+              <option value="MANY_SELECT">多选</option>
+              <option value="INPUT">填空</option>
+            </select>
             </div>
             <div class="option-items" *ngIf="data.optionType !== 'INPUT'">
-             <div class="option-items-title">
-               <h4>选项:</h4>
-               <button class="btn btn-hover " (click)="addQuestionItem(i)"> 新增选项 </button>
-             </div>
+              <div class="option-items-title">
+                <h4>题目选项:</h4>
+                <button class="btn btn-hover " (click)="addQuestionItem(i)"> 新增选项</button>
+              </div>
               <div class="option-item" *ngFor="let item of data.content;let j = index">
-                <h5>选项{{j+1}} :</h5> <input class="input" type="text" [(ngModel)]="item.content">
+                <h5>选项{{j + 1}} :</h5> <input class="input" type="text" [(ngModel)]="item.content">
+                <button class="btn btn-hover warn-btn" (click)="deleteQuestionItem(i,j)">删除</button>
+
               </div>
             </div>
           </div>
