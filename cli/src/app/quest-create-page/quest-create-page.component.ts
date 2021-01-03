@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {HttpService} from '../../services/http.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-quest-create-page',
@@ -7,7 +9,10 @@ import {Component, OnInit} from '@angular/core';
 })
 export class QuestCreatePageComponent implements OnInit {
 
-  constructor() {
+
+  constructor(private httpService: HttpService
+    ,
+              private route: Router) {
   }
 
   input = {
@@ -55,7 +60,7 @@ export class QuestCreatePageComponent implements OnInit {
     this.input.content[i].content.splice(j, 1);
   }
 
-  save() {
+  save(): void {
     if (this.input.content.length === 0) {
       alert('问卷为空！');
       return;
@@ -66,9 +71,16 @@ export class QuestCreatePageComponent implements OnInit {
         if (d.content.length === 0) {
           alert('问卷题目' + (i + 1) + '中，没有选项！');
           return;
+        } else if (d.content.length === 1) {
+          alert('问卷题目' + (i + 1) + '中，只有一项可选择');
+          return;
         }
       }
     }
-    console.log(this.input);
+
+    this.httpService.post('/api/questions', this.input, (data) => {
+      alert('创建成功！');
+      this.route.navigate(['/quest']).then(() => console.log(data));
+    });
   }
 }

@@ -8,6 +8,8 @@ import {PanelPageComponent} from './panel-page/panel-page.component';
 import {AdminUserPageComponent} from './admin-user-page/admin-user-page.component';
 import {QuestPageComponent} from './quest-page/quest-page.component';
 import {QuestCreatePageComponent} from './quest-create-page/quest-create-page.component';
+import {QuestionDetailsPageComponent} from './question-details-page/question-details-page.component';
+import {AskQuestionPageComponent} from './ask-question-page/ask-question-page.component';
 
 const routes: Routes = [
   {
@@ -27,6 +29,12 @@ const routes: Routes = [
   },
   {
     path: 'create', component: QuestCreatePageComponent
+  },
+  {
+    path: 'question/:id/:type', component: QuestionDetailsPageComponent
+  },
+  {
+    path: 'ask/:id', component: AskQuestionPageComponent
   },
   {
     path: 'users', component: AdminUserPageComponent

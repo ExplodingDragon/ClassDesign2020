@@ -137,9 +137,11 @@ class QuestionServiceImpl : IQuestionService {
         } else {
             questionRepository.findTopByCreateUserIdAndId(userId, id)
         }
-        val entity = data.get()
-        val contents = LinkedList<QuestionItemStatusModel>()
+        return internalSelect(data.get())
+    }
 
+    private fun internalSelect(entity: QuestionEntity): QuestionStatusModel {
+        val contents = LinkedList<QuestionItemStatusModel>()
         for (questionItemEntity in entity.content) {
             contents.add(
                 QuestionItemStatusModel(
@@ -162,6 +164,12 @@ class QuestionServiceImpl : IQuestionService {
             title = entity.title,
             allowGuest = entity.allowGuest
         )
+    }
+
+    override fun selectOne(id: Long): QuestionStatusModel {
+        val findById = questionRepository.findById(id)
+        return internalSelect(findById.get())
+
     }
 
     override fun length(userId: Long): RestStatus<Long> {

@@ -22,8 +22,8 @@ export class HeaderViewComponent implements OnInit {
 
   paperclip = faPaperclip;
 
-  @Input() showMenu = 'false';
-  @Input() menuIndex = '0';
+  @Input('showMenu') showMenu = false;
+  @Input('menuIndex') menuIndex = 0;
 
   menus = [
     {
@@ -41,7 +41,7 @@ export class HeaderViewComponent implements OnInit {
   ];
 
   selectIndex(): number {
-    return parseInt(this.menuIndex, 10);
+    return this.menuIndex;
   }
 
   showMen(): boolean {

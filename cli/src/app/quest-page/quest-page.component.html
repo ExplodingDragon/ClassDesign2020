@@ -1,1 +1,49 @@
 <app-header-view [showMenu]="true" [menuIndex]="1"></app-header-view>
+<div class="root">
+
+  <div class="header clear-fix">
+    <h2 class="title">问卷管理</h2>
+    <div class="page-split">
+      <button class="page-btn btn-hover first" *ngIf="index !== 0" (click)="checkPage(0)">首页</button>
+      <button class="page-btn btn-hover " *ngFor="let page of getPages();let i = index"
+              [ngClass]="i!==index?'page-btn':'page-btn-select'" (click)="checkPage(i)">
+        {{i + 1}}
+      </button>
+
+      <button class="page-btn btn-hover last" (click)="checkPage(getPageSize() -1)"
+              *ngIf="index!== getPageSize() -1">最后一页
+      </button>
+    </div>
+    <div class="create-content">
+      <button class="create warn-btn btn-hover " routerLink="/create">创建新的问卷</button>
+    </div>
+  </div>
+
+  <div class="main clear-fix">
+    <table>
+      <tr>
+        <th>id</th>
+        <th>标题</th>
+        <th>创建者</th>
+        <th>允许访客</th>
+        <th>已填写人数</th>
+        <th>管理</th>
+      </tr>
+      <tbody>
+      <tr *ngFor="let data of input">
+        <td>{{data.id}}</td>
+        <td>{{data.title}}</td>
+        <td>{{data.createUser}}</td>
+        <td>{{data.allowGuest ? '是' : '否'}}</td>
+        <td>{{data.askSize}}</td>
+        <td>
+          <button class="btn btn-hover pass-btn" (click)="see(data.id)">查看</button>
+          <button class="btn btn-hover" (click)="edit(data.id)">修改</button>
+          <button class="btn warn-btn btn-hover" (click)="delete(data.id)">删除</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

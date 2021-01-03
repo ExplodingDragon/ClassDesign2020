@@ -1,0 +1,78 @@
+<app-header-view [menuIndex]="0" [showMenu]='false'></app-header-view>
+
+<div class="root ">
+  <h2>问卷详情
+  </h2>
+  <table class="details">
+    <tr>
+      <td>标题：</td>
+      <td>{{input.title}}</td>
+    </tr>
+    <tr>
+      <td>状态：</td>
+      <td>{{input.allowGuest ? '公开' : '私有'}}</td>
+    </tr>
+    <tr>
+      <td>创建者：</td>
+      <td>{{input.createUser}}</td>
+    </tr>
+  </table>
+  <div class="quest-content">
+    <div class="save-content ">
+      <button *ngIf="!disable()" class="btn btn-hover warn-btn" (click)="save()" >保存</button>
+    </div>
+    <div class="quest-main">
+      <div class="title-content clear-fix">
+        <h3 class="qst-title">问卷标题：</h3>
+        <label>
+          <input class="input" type="text" [(ngModel)]="input.title" [disabled]="disable()">
+        </label>
+        <div class="allow-guest ">
+          <label>
+            <input type="checkbox" [(ngModel)]="input.allowGuest" [disabled]="disable()"> 允许访客填写
+          </label>
+        </div>
+
+      </div>
+      <div class="qst-items">
+
+        <div class="options clear-fix">
+          <div class="option" *ngFor="let data of input.contents;let i = index">
+            <div class="option-header">
+              <h4>选项 {{i + 1}} ：</h4>
+              <button *ngIf="!disable()" class="btn btn-hover warn-btn" (click)="deleteQuestion(i)">删除</button>
+            </div>
+
+            <div class="option-title">
+              <h4>标题：</h4>
+              <label><input type="text" class="input" [(ngModel)]="data.title" [disabled]="disable()"></label>
+            </div>
+            <div class="option-type">
+              <h4>类型：</h4>
+              <label for="group"></label><select [disabled]="disable()" class="select" id="group" [(ngModel)]="data.optionType">
+              <option value="ONE_SELECT">单选</option>
+              <option value="MANY_SELECT">多选</option>
+              <option value="INPUT">填空</option>
+            </select>
+            </div>
+            <div class="option-items" *ngIf="data.optionType !== 'INPUT'">
+              <div class="option-items-title">
+                <h4>题目选项:</h4>
+                <button class="btn btn-hover " *ngIf="!disable()" (click)="addQuestionItem(i)"> 新增选项</button>
+              </div>
+              <div class="option-item" *ngFor="let item of data.options;let j = index">
+                <h5>选项{{j + 1}} :</h5> <input [disabled]="disable()" class="input" type="text" [(ngModel)]="item.content">
+                <button *ngIf="!disable()" class="btn btn-hover warn-btn" (click)="deleteQuestionItem(i,j)">删除</button>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="qst-option">
+          <button class="btn btn-hover" *ngIf="!disable()" (click)="addQuestion()">新增问卷问题</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

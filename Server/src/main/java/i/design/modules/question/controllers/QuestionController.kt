@@ -39,7 +39,7 @@ class QuestionController {
         ]
     )
     @Token(false)
-    @GetMapping("{id}")
+    @GetMapping("{id}", produces = ["application/json"])
     fun selectOne(@PathVariable id: Long, @UserId userId: Long) =
         questionService.selectOne(id, userId)
 
@@ -49,7 +49,7 @@ class QuestionController {
         ]
     )
     @Token(false)
-    @PostMapping("")
+    @PostMapping("", consumes = ["application/json"], produces = ["application/json"])
     fun insert(@RequestBody data: QuestionCreateModel, @UserId userId: Long) =
         questionService.insert(data, userId)
 
@@ -59,7 +59,7 @@ class QuestionController {
         ]
     )
     @Token(false)
-    @PutMapping("{id}")
+    @PutMapping("{id}", consumes = ["application/json"], produces = ["application/json"])
     fun update(
         @PathVariable id: Long,
         @RequestBody data: QuestionUpdateModel,
@@ -72,7 +72,7 @@ class QuestionController {
         ]
     )
     @Token(false)
-    @DeleteMapping("{id}")
+    @DeleteMapping("{id}",produces = ["application/json"])
     fun delete(@PathVariable id: Long, @UserId userId: Long) =
         questionService.delete(id, userId)
 
@@ -82,7 +82,7 @@ class QuestionController {
         ]
     )
     @Token(false)
-    @GetMapping("count")
+    @GetMapping("count",produces = ["application/json"])
     fun length(@UserId userId: Long) = questionService.length(userId)
 
 }

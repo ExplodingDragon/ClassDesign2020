@@ -15,6 +15,8 @@ import {AdminUserPageComponent} from './admin-user-page/admin-user-page.componen
 import {InputViewComponent} from './view/input-view/input-view.component';
 import {QuestPageComponent} from './quest-page/quest-page.component';
 import {QuestCreatePageComponent} from './quest-create-page/quest-create-page.component';
+import { QuestionDetailsPageComponent } from './question-details-page/question-details-page.component';
+import { AskQuestionPageComponent } from './ask-question-page/ask-question-page.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import {QuestCreatePageComponent} from './quest-create-page/quest-create-page.co
     InputViewComponent,
     QuestPageComponent,
     HeaderViewComponent,
-    QuestCreatePageComponent
+    QuestCreatePageComponent,
+    QuestionDetailsPageComponent,
+    AskQuestionPageComponent
   ],
   imports: [
     BrowserModule,

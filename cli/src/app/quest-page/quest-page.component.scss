@@ -1,0 +1,67 @@
+.root{
+  padding: 10px;
+  margin: 0 auto;
+}
+.header{
+
+  .title{
+    font-size: 30px;
+    width: 20%;
+    display: inline-block;
+    float: left;
+  }
+
+  .page-split{
+    display: block;
+    float: left;
+    width: 70%;
+    font-size: 22px;
+    text-align: center;
+    .page-btn{
+      display: inline-block;
+      padding: 3px;
+      margin: 5px;
+    }
+    .page-btn-select{
+      display: inline-block;
+      padding: 5px;
+      background: rgba(0,0,0,.2);
+    }
+
+  }
+  .create-content{
+    width: 10%;
+    float: right;
+    display: inline-block;
+    button{
+      padding: 8px 12px;
+    }
+  }
+
+}
+.main{
+  table{
+    border: #717171 solid 1px;
+    margin: 0 auto;
+    width: 90%;
+    margin: 10px 5%  ;
+    th{
+      border: #717171 solid 1px;
+      text-align: center;
+      padding: 5px  20px;
+    }
+    th:last-child{
+      width:180px;
+    }
+    td{
+      border: #717171 solid 1px;
+      text-align: center;
+    }
+  }
+  .btn{
+    padding: 5px 10px ;
+    margin: 5px;
+    border: #717171 1px solid;
+  }
+}
+

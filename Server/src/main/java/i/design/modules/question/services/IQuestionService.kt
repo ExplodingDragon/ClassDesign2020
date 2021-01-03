@@ -17,6 +17,8 @@ interface IQuestionService {
 
     fun selectOne(id: Long, userId: Long): QuestionStatusModel
 
+    fun selectOne(id: Long): QuestionStatusModel
+
     fun length(userId: Long): RestStatus<Long>
 
 }
