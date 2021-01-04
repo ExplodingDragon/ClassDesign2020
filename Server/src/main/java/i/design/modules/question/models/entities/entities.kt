@@ -20,8 +20,8 @@ data class QuestionEntity(
     @OneToMany(cascade = [CascadeType.ALL])
     @JoinColumn(name = "quest_item_id")
     val content: MutableList<QuestionItemEntity> = mutableListOf(),
-    @OneToMany(cascade = [CascadeType.ALL],fetch = FetchType.EAGER)
-    @JoinColumn(name = "quest_ask_id")
+    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
+    @JoinColumn(name = "question_id")
     val askItem: MutableList<QuestionAskEntity> = mutableListOf()
 )
 
@@ -79,9 +79,6 @@ data class QuestionAskEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
-    @OneToOne
-    @JoinColumn(name = "askUserId")
-    var askUser: UserEntity,
     @ManyToOne
     val question: QuestionEntity,
     @OneToMany(cascade = [CascadeType.ALL])
@@ -95,7 +92,7 @@ data class QuestionAskItemEntity(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
     val content: String,
-    @OneToOne
+    @OneToOne(cascade = [CascadeType.ALL])
     @JoinColumn(name = "questItemId")
     var questItem: QuestionItemEntity,
 )

@@ -37,6 +37,7 @@
         <td>{{data.allowGuest ? '是' : '否'}}</td>
         <td>{{data.askSize}}</td>
         <td>
+          <button class="btn btn-hover pass-btn" (click)="watch(data.id)">预览</button>
           <button class="btn btn-hover pass-btn" (click)="see(data.id)">查看</button>
           <button class="btn btn-hover" (click)="edit(data.id)">修改</button>
           <button class="btn warn-btn btn-hover" (click)="delete(data.id)">删除</button>

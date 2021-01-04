@@ -2,6 +2,7 @@ package i.design.modules.users.services.impl
 
 import com.github.openEdgn.logger4k.getLogger
 import com.github.open_edgn.security4k.hash.sha384Sum
+import com.github.open_edgn.security4k.hash.sha512Sum
 import i.design.handlers.exceptions.ApplicationExceptions
 import i.design.modules.users.models.entities.UserDetailsEntity
 import i.design.modules.users.models.entities.UserEntity
@@ -11,13 +12,15 @@ import i.design.modules.users.services.IUserService
 import i.design.utils.LocalDateTimeUtils
 import i.design.utils.SnowFlake
 import i.design.utils.rest.RestStatus
+import org.springframework.boot.ApplicationArguments
+import org.springframework.boot.ApplicationRunner
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 import javax.annotation.Resource
 
 @Service
-class UserServiceImpl : IUserService {
+class UserServiceImpl : IUserService, ApplicationRunner {
     @Resource
     private lateinit var snowFlake: SnowFlake
 
@@ -39,6 +42,26 @@ class UserServiceImpl : IUserService {
             entity2Model(it)
         }.toList()
         return toList
+    }
+
+    override fun run(args: ApplicationArguments?) {
+        if (!userRepository.existsByAdmin(true)) {
+            logger.error("未找到管理员用户，将自动创建！请立即更改密码")
+            val password = LocalDateTime.now().toString()
+            insert(
+                UserModel(
+                    id = 0,
+                    email = "admin@admin.com",
+                    sex = "",
+                    name = "",
+                    image = "",
+                    password = password,
+                    admin = true,
+                    canLogin = true
+                )
+            )
+            logger.error("账户: [{}] 密码: [{}]，请立即更改！","admin@admin.com", password)
+        }
     }
 
     fun entity2Model(entity: UserEntity): UserModel {

@@ -95,4 +95,9 @@ export class QuestPageComponent implements OnInit {
       });
     }
   }
+
+  watch(id: number) {
+    this.route.navigate(['/ask/' + id ]);
+
+  }
 }

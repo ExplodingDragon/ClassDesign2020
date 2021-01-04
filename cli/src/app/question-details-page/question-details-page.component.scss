@@ -113,6 +113,9 @@ h2{
     .option-item{
       border: #717171 1px solid;
       margin: 5px;
+      .detail{
+        float: right;
+      }
       h5{
         display: inline-block;
       }

@@ -24,7 +24,8 @@ export class QuestionDetailsPageComponent implements OnInit {
         options: [
           {
             id: 0,
-            content: 'data'
+            content: 'data',
+            selectSize: 0
           }
         ]
       }
@@ -45,7 +46,7 @@ export class QuestionDetailsPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.httpService.get('/api/questions/' + this.id, (data) => {
+    this.httpService.get((this.disable() ? '/api/ask/' : '/api/questions/') + this.id, (data) => {
       this.input = data;
     });
   }
@@ -58,7 +59,8 @@ export class QuestionDetailsPageComponent implements OnInit {
       options: [
         {
           id: 0,
-          content: '题号'
+          content: '题号',
+          selectSize: 0
         }
       ]
     });
@@ -67,7 +69,8 @@ export class QuestionDetailsPageComponent implements OnInit {
   addQuestionItem(index: number): void {
     this.input.contents[index].options.push({
       id: 0,
-      content: '选项'
+      content: '选项',
+      selectSize: 0
     });
   }
 
@@ -97,9 +100,18 @@ export class QuestionDetailsPageComponent implements OnInit {
       }
     }
 
-    this.httpService.put('/api/questions/' +  this.id, this.input, (data) => {
+    this.httpService.put('/api/questions/' + this.id, this.input, (data) => {
       alert('修改成功！');
       this.route2.navigate(['/quest']).then(() => console.log(data));
     });
+  }
+
+  desc(n1: number, n2: number): string {
+    console.log(n1);
+    if (n2 > 0 && n1 > 0) {
+      return parseInt(String((n1 * 100 / n2)), 10).toString();
+    } else {
+      return '0';
+    }
   }
 }

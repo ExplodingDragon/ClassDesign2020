@@ -11,4 +11,5 @@ interface UserRepository : JpaRepository<UserEntity, Long> {
 
     fun existsByEmail(email: String): Boolean
     fun findOneByEmail(email: String):Optional<UserEntity>
+    fun existsByAdmin(b: Boolean):Boolean
 }

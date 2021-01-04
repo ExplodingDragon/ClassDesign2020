@@ -16,10 +16,14 @@
       <td>创建者：</td>
       <td>{{input.createUser}}</td>
     </tr>
+    <tr *ngIf="disable()">
+      <td>投票人数：</td>
+      <td>{{input.askSize}}</td>
+    </tr>
   </table>
   <div class="quest-content">
     <div class="save-content ">
-      <button *ngIf="!disable()" class="btn btn-hover warn-btn" (click)="save()" >保存</button>
+      <button *ngIf="!disable()" class="btn btn-hover warn-btn" (click)="save()">保存</button>
     </div>
     <div class="quest-main">
       <div class="title-content clear-fix">
@@ -49,7 +53,8 @@
             </div>
             <div class="option-type">
               <h4>类型：</h4>
-              <label for="group"></label><select [disabled]="disable()" class="select" id="group" [(ngModel)]="data.optionType">
+              <label for="group"></label><select [disabled]="disable()" class="select" id="group"
+                                                 [(ngModel)]="data.optionType">
               <option value="ONE_SELECT">单选</option>
               <option value="MANY_SELECT">多选</option>
               <option value="INPUT">填空</option>
@@ -61,9 +66,10 @@
                 <button class="btn btn-hover " *ngIf="!disable()" (click)="addQuestionItem(i)"> 新增选项</button>
               </div>
               <div class="option-item" *ngFor="let item of data.options;let j = index">
-                <h5>选项{{j + 1}} :</h5> <input [disabled]="disable()" class="input" type="text" [(ngModel)]="item.content">
+                <h5>选项{{j + 1}} :</h5> <input [disabled]="disable()" class="input" type="text"
+                                              [(ngModel)]="item.content">
                 <button *ngIf="!disable()" class="btn btn-hover warn-btn" (click)="deleteQuestionItem(i,j)">删除</button>
-
+                <p class="detail" *ngIf="disable()">有 {{item.selectSize}} 人选中此选项，占总人数的 {{desc(item.selectSize, input.askSize)}} %</p>
               </div>
             </div>
           </div>

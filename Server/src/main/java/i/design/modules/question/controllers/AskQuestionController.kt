@@ -1,10 +1,8 @@
 package i.design.modules.question.controllers
 
+import i.design.modules.question.models.input.AnswerModel
 import i.design.modules.question.services.IAskQuestionService
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import javax.annotation.Resource
 
 @RestController
@@ -13,6 +11,8 @@ class AskQuestionController {
     @Resource
     private lateinit var askQuestionService: IAskQuestionService
 
+    @PostMapping("/ask", consumes = ["application/json"], produces = ["application/json"])
+    fun postPrivateAnswer(@RequestBody ans: AnswerModel) = askQuestionService.postData(ans)
 //    , consumes = ["application/json"], produces = ["application/json"]
 
     @GetMapping("/{id}", produces = ["application/json"])
